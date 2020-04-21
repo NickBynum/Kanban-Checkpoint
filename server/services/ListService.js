@@ -6,7 +6,7 @@ class ListService {
     return await dbContext.List.find({ creatorEmail: userEmail }).populate("title", "creator email")
   }
   async getByBoardId(boardId, userEmail) {
-    let data = await dbContext.List.findOne({ _id: boardId, creatorEmail: userEmail })
+    let data = await dbContext.List.findById ({ _id: boardId, creatorEmail: userEmail })
     if (!data) {
       throw new BadRequest("Inalid ID or you do not own this list!!!!")
     }

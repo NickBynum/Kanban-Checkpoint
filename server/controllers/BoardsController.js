@@ -16,9 +16,14 @@ export class BoardsController extends BaseController {
       .post('', this.create)
       .put('/:id', this.edit)
       .delete('/:id', this.delete)
+      .get('/:id/lists', this.getListByBoardId)
   }
 
+//NOTE methods to chain list by boardId
 
+async getListByBoardId(req, res, next) {
+  let data = await boardService.getListByBoardId(req.params.id, req.userInfo.email)
+}
   async getAll(req, res, next) {
     try {
       //only gets boards by user who is logged in

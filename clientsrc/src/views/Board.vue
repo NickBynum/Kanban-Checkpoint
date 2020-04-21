@@ -23,7 +23,7 @@ export default {
       return this.$store.state.activeBoard;
     },
     lists() {
-      return this.$store
+      return this.$store.state.activeBoard
     },
     profile(){
       return this.$store.state.user

@@ -76,6 +76,16 @@ export default new Vuex.Store({
 
     //#region -- LISTS --
     //NOTE if fails try setActiveBoard in commit, if fails again give up
+async getListByBoardId({commit, dispatch}, boardId) {
+  try {
+    let res = await api.get("boards/" + boardId + "/list")
+    commit('setActiveBoard', res.data)
+  } catch (error) {
+    console.error(error);
+    
+  }
+},
+
     async editList({ commit, dispatch }, listId) {
       try {
         let res = await api.put("list/" + listId.id, listId)

@@ -3,6 +3,12 @@ import { BadRequest } from "../utils/Errors"
 
 
 class BoardService {
+  async getListByBoardId(boardId, userEmail) {
+    let data = await dbContext.List.find({ boardId: boardId, creatorEmail: userEmail })
+    if (!data) {
+      throw new BadRequest("Invalid Board or you do not own this board")
+    }
+  }
   async getAll(userEmail) {
     return await dbContext.Boards.find({ creatorEmail: userEmail }).populate("creator", "name picture")
   }
