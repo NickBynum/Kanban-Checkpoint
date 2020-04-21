@@ -7,12 +7,12 @@ export class ListController extends BaseController {
   constructor() {
     super("api/list")
     this.router
-      .use(auth0provider.getAuthorizedUserInfo)
-      // .get('', this.getAll)
-      .get('/:id', this.getByBoardId)
-      .post('', this.createList)
-      .put('/:id', this.editList)
-      .delete('/:id', this.deleteList)
+    .use(auth0provider.getAuthorizedUserInfo)
+    // .get('', this.getAll)
+    .get('/:id', this.getByBoardId)
+    .post('', this.createList)
+    .put('/:id', this.editList)
+    .delete('/:id', this.deleteList)
   }
   async getByBoardId(req, res, next) {
     try {
