@@ -8,11 +8,20 @@ export class ListController extends BaseController {
     super("api/list")
     this.router
     .use(auth0provider.getAuthorizedUserInfo)
-    // .get('', this.getAll)
+    .get('', this.getAll)
     .get('/:id', this.getByBoardId)
     .post('', this.createList)
     .put('/:id', this.editList)
     .delete('/:id', this.deleteList)
+  }
+
+  async getAll(req, res, next) {
+    try {
+      //only gets boards by user who is logged in
+      let data = await listService.getAll(req.userInfo.email)
+      return res.send(data)
+    }
+    catch (err) { next(err) }
   }
   async getByBoardId(req, res, next) {
     try {
