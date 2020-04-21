@@ -1,15 +1,18 @@
 <template>
-  <div class="list">
-    <h1>{{listData.title}}</h1>
-    <p>{{this.$route.params}}</p>
-    <button @click="editList()">edit</button>
-    <taskComp v-for="task in tasks" :taskData = "task" :key="task._id"></taskComp>
+  <div class="list col-2 m-2 ml-4 p-2 border rounded">
+    <div class="row">
+      <div class="col-12">{{listData.title}}</div>
+
+    </div>
+
+    <button class="d-none" @click="editList()">edit</button>
+    <task v-for="task in tasks" :taskData = "task" :key="task._id"></task>
   </div>
 </template>
 
 
 <script>
-import TaskComp from "../components/TaskComp";
+import Task from "../components/TaskComp";
 export default {
   name: "list",
   props: ["listData"],
@@ -29,13 +32,16 @@ export default {
     }
   },
   methods: {
+    addList(){
+
+    },
     editList() {
       this.$store.dispatch("editList", this.listData);
       // this.editing = false;
     }
   },
   components: {
-    TaskComp
+    Task
   }
 };
 </script>
