@@ -1,23 +1,31 @@
 <template>
-  <div class="task">
-<h1>this is our task</h1>
-<p>{{taskData.title}}</p>
-<button @click="editTask()">edit</button>
+  <div class="task bg-light text-dark border border-primary rounded">
+<p class="m-1 p-2">{{taskData.title}}
+<button class="btn-primary" @click="editTask()">edit task</button>
+</p>
+    <comment class="d-none" v-for="comment in comments" :commentData = "comment" :key="comment._id"></comment>
 
   </div>
 </template>
 
 
 <script>
+import Comment from "../components/CommentComp"
 export default {
   name: 'task',
   props: ["taskData"],
+  mounted() {
+    this.$store.dispatch("getCommentByTaskId", this.taskData.id)
+  },
   data(){
     return {}
   },
   computed:{
     profile() {
       return this.$store.state.user
+    },
+    comments() {
+      return this.$store.state.comments
     }
   },
   methods:{
@@ -26,7 +34,9 @@ export default {
       // this.editing = false;
     }
   },
-  components:{}
+  components:{
+    Comment
+  }
 }
 </script>
 

@@ -14,7 +14,7 @@ export class ListController extends BaseController {
       .post('', this.createList)
       .put('/:id', this.editList)
       .delete('/:id', this.deleteList)
-      .get('/:id/list', this.getTaskByListId)
+      .get('/:id/task', this.getTaskByListId)
   }
 
   async getAll(req, res, next) {

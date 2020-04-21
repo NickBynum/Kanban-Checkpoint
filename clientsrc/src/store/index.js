@@ -117,7 +117,21 @@ async getListByBoardId({commit, dispatch}, boardId) {
       } catch (error) {
         console.error(error);
       }
+    },
+    //#endregion
+
+
+
+    //#region --Comments --
+    async getCommentByTaskId({commit, dispatch}, taskId) {
+      try {
+        let res = await api.get("task/" + taskId + "/comment")
+        commit('setActiveComment', res.data)
+      } catch (error) {
+        console.error(error);
+      }
     }
+
     //#endregion
   }
 })

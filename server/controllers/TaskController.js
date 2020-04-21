@@ -14,6 +14,7 @@ export class TaskController extends BaseController {
       .post('', this.createTask)
       .put('/:id', this.editTask)
       .delete('/:id', this.deleteTask)
+      .get('/:id/comment', this.getCommentByTaskId)
   }
  // async getByListId(req, res, next) {
  //   try {
