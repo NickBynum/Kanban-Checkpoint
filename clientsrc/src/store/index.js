@@ -10,7 +10,7 @@ let base = window.location.host.includes('localhost') ? '//localhost:3000/' : '/
 
 let api = Axios.create({
   baseURL: base + "api/",
-  timeout: 3000,
+  timeout: 10000,
   withCredentials: true
 })
 
@@ -20,7 +20,7 @@ export default new Vuex.Store({
     boards: [],
     activeBoard: {},
     lists: [],
-    tasks: [],
+    tasks: {},
     comments: [],
   },
   mutations: {
@@ -36,8 +36,9 @@ export default new Vuex.Store({
     setActiveList(state, lists) {
       state.lists = lists
     },
-    setActiveTask(state, tasks) {
-      state.tasks = tasks
+    setActiveTask(state, payload) {
+      // state.tasks[payload.listId] = payload.tasks **the ways of the old**
+      Vue.set(state.tasks, payload.listId, payload.tasks)
     },
     setActiveComment(state, comments) {
       state.comments = comments
@@ -97,7 +98,16 @@ async getListByBoardId({commit, dispatch}, boardId) {
     
   }
 },
-
+  async addNewList( {commit, dispatch}, newList){
+    try {
+      let res = await api.post("list", newList)
+      dispatch("getBoard", newList.boardId)
+      dispatch("getListByBoardId", newList.boardId)
+    } catch (error) {
+      console.error(error);
+      
+    }
+  },
     async editList({ commit, dispatch }, listId) {
       try {
         let res = await api.put("list/" + listId.id, listId)
@@ -113,7 +123,7 @@ async getListByBoardId({commit, dispatch}, boardId) {
     async getTaskByListId({commit, dispatch}, listId) {
       try {
         let res = await api.get("list/" + listId + "/task")
-        commit('setActiveTask', res.data)
+        commit('setActiveTask', {listId, tasks: res.data})
       } catch (error) {
         console.error(error);
       }
