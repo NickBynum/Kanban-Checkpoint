@@ -18,7 +18,6 @@ export default {
   computed:{},
   methods:{
     selectBoard() {
-      debugger
       this.$store.commit("setActiveBoard", {})
       this.$router.push({
         name: "board",

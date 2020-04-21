@@ -15,6 +15,7 @@ export default {
   name: "board",
   mounted() {
     this.$store.dispatch("getBoard", this.$route.params.boardId);
+    this.$store.dispatch("setBoard", this.state)
   },
   computed: {
     board() {
@@ -22,10 +23,10 @@ export default {
       return this.$store.state.activeBoard;
     },
     lists() {
-      return this.$store.state.activeBoard.lists
+      return this.$store
     },
     profile(){
-      return this.$store.state.profile
+      return this.$store.state.user
     }
   },
   props: ["boardId"],

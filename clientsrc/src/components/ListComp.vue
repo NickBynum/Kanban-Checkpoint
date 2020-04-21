@@ -1,6 +1,7 @@
 <template>
   <div class="list">
-<h1>this is out list</h1>
+<h1>this is our list</h1>
+<p>{{listData.title}}</p>
 <button @click="editList()">edit</button>
 
   </div>
@@ -16,7 +17,7 @@ export default {
   },
   computed:{
     profile() {
-      return this.$store.state.profile
+      return this.$store.state.user
     }
   },
   methods:{
