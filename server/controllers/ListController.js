@@ -34,14 +34,14 @@ export class ListController extends BaseController {
   async createList(req, res, next) {
     try {
       req.body.creatorEmail = req.userInfo.email
-      let data = await listService.createList(req.title)
+      let data = await listService.createList(req.body)
       return res.send(data)
 
     } catch (error) { next(error) }
   }
   async editList(req, res, next) {
     try {
-      let data = await listService.editList(req.params.id, req.userInfo.email, req.title)
+      let data = await listService.editList(req.params.id, req.userInfo.email, req.body)
     } catch (error) { next(error)
     }
   }

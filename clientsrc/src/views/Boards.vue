@@ -6,14 +6,14 @@
       <input type="text" placeholder="description" v-model="newBoard.description" />
       <button type="submit">Create Board</button>
     </form>
-    <board v-for="board in boards" :boardData="board" :key="board.id">
+    <BoardComp v-for="board in boards" :boardData="board" :key="board.id">
       <!-- <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link> -->
-    </board>
+    </BoardComp>
   </div>
 </template>
 
 <script>
-import Board from "../components/Board";
+import BoardComp from "../components/BoardComp";
 export default {
   name: "boards",
   mounted() {
@@ -42,7 +42,7 @@ export default {
     }
   },
   components: {
-    Board
+    BoardComp
   }
 };
 </script>
