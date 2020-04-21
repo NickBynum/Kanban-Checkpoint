@@ -6,17 +6,21 @@
       <input type="text" placeholder="description" v-model="newBoard.description" />
       <button type="submit">Create Board</button>
     </form>
-    <div v-for="board in boards" :key="board.id">
-      <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link>
-    </div>
+    <board v-for="board in boards" :boardData="board" :key="board.id">
+      <!-- <router-link :to="{name: 'board', params: {boardId: board.id}}">{{board.title}}</router-link> -->
+    </board>
   </div>
 </template>
 
 <script>
+import Board from "../components/Board";
 export default {
   name: "boards",
   mounted() {
     this.$store.dispatch("getBoards");
+  },
+  created() {
+        this.$store.dispatch("getBoards");
   },
   data() {
     return {
@@ -36,6 +40,9 @@ export default {
       this.$store.dispatch("addBoard", this.newBoard);
       this.newBoard = { title: "", description: "" };
     }
+  },
+  components: {
+    Board
   }
 };
 </script>

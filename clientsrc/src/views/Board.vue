@@ -1,7 +1,11 @@
 <template>
   <div class="board">
-    <h1 v-if="board.title">{{board.title}}</h1>
-    <h1 v-else>Loading...</h1>
+    <div v-if="board.title">{{board.title}}
+      
+
+
+    </div>
+    <div v-else>Loading...</div>
   </div>
 </template>
 
@@ -10,7 +14,7 @@ export default {
   name: "board",
   computed: {
     board() {
-      //FIXME This does not work on page reload because the activeBoard is empty in the store
+      //FIXME This does not work on page reload because the activeBoard is empty in the store **SOLVED**
       return this.$store.state.activeBoard;
     }
   },
