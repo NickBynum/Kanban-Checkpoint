@@ -57,7 +57,7 @@ export default new Vuex.Store({
           commit('setBoards', res.data)
         })
     },
-    async getBoard({commit, dispatch}, boardId){
+    async getBoard({ commit, dispatch }, boardId) {
       try {
         let res = await api.get("boards/" + boardId)
         commit("setActiveBoard", res.data)
@@ -70,12 +70,21 @@ export default new Vuex.Store({
         .then(serverBoard => {
           dispatch('getBoards')
         })
-    }
+    },
     //#endregion
 
 
     //#region -- LISTS --
-
+    //NOTE if fails try setActiveBoard in commit, if fails again give up
+    async editList({ commit, dispatch }, listId) {
+      try {
+        let res = await api.put("list/" + listId.id, listId)
+        commit('setBoards', res.data)
+        dispatch('getBoard', listId.boardId)
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
 
     //#endregion
