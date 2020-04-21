@@ -1,27 +1,32 @@
 <template>
   <div class="board container-fluid">
-    <div class="row flex-row">
-        <p>{{board.title}}</p>
+    <div class="row">
+      <p>{{board.title}}</p>
     </div>
-      <div class="col-12 card bg-dark text-light" v-if="board.title">
-        <div class="row">
-          <div class="col-12"></div>
-        </div>
-        <list v-for="list in lists" :listData="list" :key="list._id"></list>
-        <div class="col-6"><button class="btn btn-sm bg-dark text-white" @click="addList()">Add List</button></div>
-      </div>
+    <div class="flex-row card bg-dark text-light" v-if="board.title">
+      <list v-for="list in lists" :listData="list" :key="list._id"></list>
+       <form>
+       <input type="text" v-model="newList.title" class="bg-dark text-white input-group-sm border-0 ml-5" placeholder="New List" @submit="addNewList()">
+        <button type="submit" @click="addNewList()">submit</button>
+        </form>
+    </div>
 
-
-      <!--dont touch
-      -->
-      <div v-else>Loading...</div>
+    <!--dont touch
+    -->
+    <div v-else>Loading...</div>
   </div>
 </template>
 
 <script>
 import List from "../components/ListComp";
 export default {
+  data () {
+    return {
+      newList: {}
+    }
+  },
   name: "board",
+  props: ["boardId"],
   mounted() {
     this.$store.dispatch("getBoard", this.$route.params.boardId);
     this.$store.dispatch("getListByBoardId", this.$route.params.boardId);
@@ -38,9 +43,21 @@ export default {
       return this.$store.state.user;
     }
   },
-  props: ["boardId"],
+  methods: {
+    addNewList(){
+      this.newList.boardId = this.$route.params.boardId
+      this.newList.creatorEmail = this.board.creatorEmail
+      console.log("addNewList", this.newList.creatorEmail);
+      this.$store.dispatch("addNewList", this.newList);
+      this.newList = {}
+    }
+  },
   components: {
     List
   }
 };
 </script>
+
+<style>
+
+</style>

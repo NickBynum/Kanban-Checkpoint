@@ -28,7 +28,7 @@ export default {
       return this.$store.state.user;
     },
     tasks(){
-    return this.$store.state.tasks
+    return this.$store.state.tasks[this.listData.id]
     }
   },
   methods: {
