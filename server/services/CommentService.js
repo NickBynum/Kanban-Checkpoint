@@ -2,6 +2,13 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest } from "../utils/Errors"
 
 class CommentService {
+  async getCommentByTaskId(taskId, userEmail) {
+    let data = await dbContext.Comment.find({ taskId: taskId, creatorEmail: userEmail })
+    if (!data) {
+      throw new BadRequest("Inalid ID or you do not own this comment!!!!")
+    }
+    return data
+  }
   async getByTaskId(taskId, userEmail) {
     let data = await dbContext.Comment.findOne({ _id: taskId, creatorEmail: userEmail })
     if (!data) {

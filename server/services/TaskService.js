@@ -2,13 +2,14 @@ import { dbContext } from "../db/DbContext"
 import { BadRequest } from "../utils/Errors"
 
 class TaskService {
-  async getByListId(listId, userEmail) {
-    let data = await dbContext.Task.findOne({ _id: listId, creatorEmail: userEmail })
+
+  async getTaskByListId(listId, userEmail) {
+    let data = await dbContext.Task.find({listId: listId, creatorEmail: userEmail})
     if (!data) {
-      throw new BadRequest("Inalid ID or you do not own this task!!!!")
-    }
-    return data
+      throw new BadRequest("bad stuff happened.")
   }
+return data
+}
   async createTask(rawData) {
     let data = await dbContext.Task.create(rawData)
     return data
