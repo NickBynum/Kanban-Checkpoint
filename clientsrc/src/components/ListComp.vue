@@ -1,36 +1,45 @@
 <template>
   <div class="list">
-<h1>this is our list</h1>
-<p>{{listData.title}}</p>
-<button @click="editList()">edit</button>
-
+    <h1>{{listData.title}}</h1>
+    <p>{{this.$route.params}}</p>
+    <button @click="editList()">edit</button>
+    <taskComp v-for="task in tasks" :taskData = "task" :key="task._id"></taskComp>
   </div>
 </template>
 
 
 <script>
+import TaskComp from "../components/TaskComp";
 export default {
-  name: 'list',
+  name: "list",
   props: ["listData"],
-  data(){
-    return {}
+  mounted() {
+    // this.$store.dispatch("getListByBoardId", this.$route.params.listId);
+    this.$store.dispatch("getTaskByListId", this.listData.id);
   },
-  computed:{
+  data() {
+    return {};
+  },
+  computed: {
     profile() {
-      return this.$store.state.user
+      return this.$store.state.user;
+    },
+    tasks(){
+    return this.$store.state.tasks
     }
   },
-  methods:{
+  methods: {
     editList() {
       this.$store.dispatch("editList", this.listData);
       // this.editing = false;
     }
   },
-  components:{}
-}
+  components: {
+    TaskComp
+  }
+};
 </script>
 
 
 <style scoped>
-
 </style>
