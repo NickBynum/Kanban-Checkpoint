@@ -25,14 +25,14 @@ export class CommentController extends BaseController {
   async createComment(req, res, next) {
     try {
       req.body.creatorEmail = req.userInfo.email
-      let data = await commentService.createComment(req.title)
+      let data = await commentService.createComment(req.body)
       return res.send(data)
 
     } catch (error) { next(error) }
   }
   async editComment(req, res, next) {
     try {
-      let data = await commentService.editComment(req.params.id, req.userInfo.email, req.title)
+      let data = await commentService.editComment(req.params.id, req.userInfo.email, req.body)
     } catch (error) { next(error)
     }
   }
