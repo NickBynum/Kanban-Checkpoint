@@ -9,7 +9,7 @@ export class ListController extends BaseController {
     this.router
     .use(auth0provider.getAuthorizedUserInfo)
     .get('', this.getAll)
-    .get('/:id', this.getByBoardId)
+    // .get('/:id', this.getByBoardId)
     .post('', this.createList)
     .put('/:id', this.editList)
     .delete('/:id', this.deleteList)
@@ -23,13 +23,7 @@ export class ListController extends BaseController {
     }
     catch (err) { next(err) }
   }
-  async getByBoardId(req, res, next) {
-    try {
-      let data = await listService.getByBoardId(req.params.id, req.userInfo.email)
-      return res.send(data)
-    } catch (error) { next(error) 
-    }
-  }
+
 
   async createList(req, res, next) {
     try {

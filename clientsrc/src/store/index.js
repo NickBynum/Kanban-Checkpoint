@@ -18,7 +18,8 @@ export default new Vuex.Store({
   state: {
     user: {},
     boards: [],
-    activeBoard: {}
+    activeBoard: {},
+    lists: [],
   },
   mutations: {
     setUser(state, user) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     setActiveBoard(state, board) {
       state.activeBoard = board
+    },
+    setActiveList(state, lists) {
+      state.lists = lists
     }
   },
   actions: {
@@ -79,7 +83,7 @@ export default new Vuex.Store({
 async getListByBoardId({commit, dispatch}, boardId) {
   try {
     let res = await api.get("boards/" + boardId + "/list")
-    commit('setActiveBoard', res.data)
+    commit('setActiveList', res.data)
   } catch (error) {
     console.error(error);
     

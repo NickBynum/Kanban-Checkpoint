@@ -15,6 +15,7 @@ export default {
   name: "board",
   mounted() {
     this.$store.dispatch("getBoard", this.$route.params.boardId);
+    this.$store.dispatch("getListByBoardId", this.$route.params.boardId)
     this.$store.dispatch("setBoard", this.state)
   },
   computed: {
@@ -23,7 +24,7 @@ export default {
       return this.$store.state.activeBoard;
     },
     lists() {
-      return this.$store.state.activeBoard
+      return this.$store.state.lists
     },
     profile(){
       return this.$store.state.user
