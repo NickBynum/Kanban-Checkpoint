@@ -139,7 +139,7 @@ export default new Vuex.Store({
     },
     async addNewTask({ commit, dispatch }, newTask) {
       try {
-        console.log(newTask);
+        console.log("addNewTask", newTask);
 
         let res = await api.post("task", newTask)
         // dispatch("getBoard", newTask.listId) //REVISIT AFTER SLEEP
@@ -178,6 +178,7 @@ export default new Vuex.Store({
       }
     },
     async addNewComment({ commit, dispatch }, newComment) {
+      debugger
       try {
         let res = await api.post("comment", newComment)
         // dispatch("getBoard", newTask.listId) //REVISIT AFTER SLEEP

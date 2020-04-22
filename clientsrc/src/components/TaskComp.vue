@@ -2,32 +2,35 @@
   <div class="task bg-light text-dark border border-primary rounded">
     <div v-if="!editing">
       <p class="m-1 p-2">{{taskData.title}}</p>
-   <!-- Will be replaced by click on the task -->
-    <button
-      type="button"
-      class="btn btn-dark btn-sm"
-      data-toggle="modal"
-      :data-target="'#commentBodyModal' + taskData.id"
-    >View Comment</button>
-    <!-- Modal -->
-    <div
-      class="modal fade"
-      :id="'commentBodyModal' + taskData.id"
-      tabindex="-1"
-      role="dialog"
-    >
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="commentModal">{{taskData.title}}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
+      <!-- Will be replaced by click on the task -->
+      <button
+        type="button"
+        class="btn btn-dark btn-sm"
+        data-toggle="modal"
+        :data-target="'#commentBodyModal' + taskData.id"
+      >View Comment</button>
+      <!-- Modal -->
+      <div class="modal fade" :id="'commentBodyModal' + taskData.id" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="commentModal">{{taskData.title}}</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <comment class v-for="comment in comments" :commentData="comment" :key="comment._id"></comment>
+                  <div>
+      <form>
+       <input type="text" v-model="newComment.title" class="bg-dark text-white input-group-sm border-0 ml-5" placeholder="New Comment">
+        <button @click="addNewComment()">submit</button>
+      </form>
+    </div>
+            </div>
           </div>
-          <div class="modal-body"><comment class="" v-for="comment in comments" :commentData="comment" :key="comment._id"></comment></div>
         </div>
       </div>
-  </div>
       <button class="btn text-secondary" @click="editing = true">
         <svg
           class="bi bi-pencil-square"
@@ -105,11 +108,11 @@ export default {
   },
   methods: {
     addNewComment() {
-      this.newComment.taskId = this.taskData.id
-      this.newComment.creatorEmail = this.taskData.creatorEmail
-      console.log("addNewList", this.newTask.creatorEmail);
-      this.$store.dispatch("addNewTask", this.newTask);
-      this.newComment = {}
+      this.newComment.taskId = this.taskData.id;
+      this.newComment.creatorEmail = this.taskData.creatorEmail;
+      console.log("addNewComment", this.newComment.creatorEmail);
+      this.$store.dispatch("addNewComment", this.newComment);
+      this.newComment = {};
     },
     deleteTask() {
       this.$store.dispatch("deleteTask", this.taskData);

@@ -1,5 +1,6 @@
 <template>
   <div class="comment">
+    <div v-if="!editing">
     <p>{{commentData.title}}</p>
       <button class="btn btn-sm text-warning" @click="editing = true">
         <svg
@@ -41,6 +42,13 @@
           />
         </svg>
       </button>
+    </div>
+    <div v-else>
+      <form>
+        <input type="text" v-model="commentData.title" />
+        <button class="btn text-warning" @click="editComment()">submit</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -50,7 +58,9 @@ export default {
   name: "comment",
   props: ["commentData"],
   data() {
-    return {};
+    return {
+      editing: false
+    };
   },
   computed: {
     profile() {
@@ -61,6 +71,9 @@ export default {
     editComment() {
       this.$store.dispatch("editComment", this.commentData);
       this.editing = false;
+    },
+    deleteComment() {
+      this.$store.dispatch("deleteComment", this.commentData);
     }
   },
   components: {}
