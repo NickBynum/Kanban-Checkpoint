@@ -11,7 +11,7 @@
             data-toggle="dropdown"
           >move</button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <button v-for="list in lists" :listData="list" :key="list._id" class="dropdown-item" type="button">{{listData.title}}</button>
+            <list v-for="list in lists" :listData="list" :key="list._id" class="dropdown-item" type="button">{{list.title}}</list>
           </div>
         </div>
       </div>
@@ -114,7 +114,7 @@ export default {
   data() {
     return {
       editing: false,
-      newComment: {}
+      newComment: {},
     };
   },
   computed: {
