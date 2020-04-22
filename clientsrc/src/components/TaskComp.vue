@@ -100,7 +100,7 @@ export default {
       return this.$store.state.user;
     },
     comments() {
-      return this.$store.state.comments;
+      return this.$store.state.comments[this.taskData.id];
     }
   },
   methods: {

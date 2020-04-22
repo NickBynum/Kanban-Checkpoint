@@ -21,7 +21,7 @@ export default new Vuex.Store({
     activeBoard: {},
     lists: [],
     tasks: {},
-    comments: [],
+    comments: {},
   },
   mutations: {
     setUser(state, user) {
@@ -40,8 +40,9 @@ export default new Vuex.Store({
       // state.tasks[payload.listId] = payload.tasks **the ways of the old**
       Vue.set(state.tasks, payload.listId, payload.tasks)
     },
-    setActiveComment(state, comments) {
-      state.comments = comments
+    setActiveComment(state, payload) {
+      // state.comments = comments **ways of days past**
+      Vue.set(state.comments, payload.taskId, payload.comments)
     }
   },
   actions: {
@@ -171,7 +172,7 @@ export default new Vuex.Store({
     async getCommentByTaskId({ commit, dispatch }, taskId) {
       try {
         let res = await api.get("task/" + taskId + "/comment")
-        commit('setActiveComment', res.data)
+        commit('setActiveComment', { taskId, comments: res.data })
       } catch (error) {
         console.error(error);
       }
