@@ -139,10 +139,10 @@ export default new Vuex.Store({
     async addNewTask({ commit, dispatch }, newTask) {
       try {
         console.log(newTask);
-        
+
         let res = await api.post("task", newTask)
-        dispatch("getBoard", newTask.listId)
-        dispatch("getListByBoardId", newTask.listId)
+        // dispatch("getBoard", newTask.listId) //REVISIT AFTER SLEEP
+        dispatch("getTaskByListId", newTask.listId)
       } catch (error) {
         console.error(error);
       }
@@ -175,7 +175,32 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
-    }
+    },
+    async addNewComment({ commit, dispatch }, newComment) {
+      try {
+        let res = await api.post("comment", newComment)
+        // dispatch("getBoard", newTask.listId) //REVISIT AFTER SLEEP
+        dispatch("getCommentByTaskId", newComment.taskId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editComment({ commit, dispatch }, commentData) {
+      try {
+        let res = await api.put("comment/" + commentData.id, commentData)
+        dispatch("getCommentByTaskId", commentData.taskId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteComment({ commit, dispatch }, commentData) {
+      try {
+        let res = await api.delete("comment/" + commentData.id)
+        dispatch("getCommentByTaskId", commentData.taskId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
 
     //#endregion
   }
