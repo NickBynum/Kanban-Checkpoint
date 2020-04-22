@@ -42,6 +42,7 @@ async getCommentByTaskId(req, res, next) {
   async editTask(req, res, next) {
     try {
       let data = await taskService.editTask(req.params.id, req.userInfo.email, req.body)
+      res.send(data)
     } catch (error) { next(error)
     }
   }

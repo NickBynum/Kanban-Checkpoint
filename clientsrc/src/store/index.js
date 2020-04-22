@@ -167,8 +167,9 @@ export default new Vuex.Store({
     async moveTaskToDifList({ commit, dispatch }, taskData) {
       try {
         let res = await api.put("task/" + taskData.id, taskData)
-        debugger
         dispatch("getTaskByListId", taskData.listId)
+        dispatch("getTaskByListId", taskData.oldListId)
+        
       } catch (error) {
         console.error(error);
         
@@ -201,6 +202,7 @@ export default new Vuex.Store({
       try {
         let res = await api.put("comment/" + commentData.id, commentData)
         dispatch("getCommentByTaskId", commentData.taskId)
+
       } catch (error) {
         console.error(error);
       }
