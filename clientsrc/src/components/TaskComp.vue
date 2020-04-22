@@ -2,6 +2,19 @@
   <div class="task bg-light text-dark border border-primary rounded">
     <div v-if="!editing">
       <p class="m-1 p-2">{{taskData.title}}</p>
+      <div>
+        <div class="dropdown">
+          <button
+            class="btn btn-secondary dropdown-toggle"
+            type="button"
+            id="dropdownMenu2"
+            data-toggle="dropdown"
+          >move</button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+            <button v-for="list in lists" :listData="list" :key="list._id" class="dropdown-item" type="button">{{listData.title}}</button>
+          </div>
+        </div>
+      </div>
       <!-- Will be replaced by click on the task -->
       <button
         type="button"
@@ -21,12 +34,17 @@
             </div>
             <div class="modal-body">
               <comment class v-for="comment in comments" :commentData="comment" :key="comment._id"></comment>
-                  <div>
-      <form>
-       <input type="text" v-model="newComment.title" class="bg-dark text-white input-group-sm border-0 ml-5" placeholder="New Comment">
-        <button @click="addNewComment()">submit</button>
-      </form>
-    </div>
+              <div>
+                <form>
+                  <input
+                    type="text"
+                    v-model="newComment.title"
+                    class="bg-dark text-white input-group-sm border-0 ml-5"
+                    placeholder="New Comment"
+                  />
+                  <button @click="addNewComment()">submit</button>
+                </form>
+              </div>
             </div>
           </div>
         </div>
@@ -86,6 +104,7 @@
 
 <script>
 import Comment from "../components/CommentComp";
+import List from "../components/ListComp"
 export default {
   name: "task",
   props: ["taskData"],
@@ -104,6 +123,9 @@ export default {
     },
     comments() {
       return this.$store.state.comments[this.taskData.id];
+    },
+    lists() {
+      return this.$store.state.lists
     }
   },
   methods: {
@@ -123,7 +145,8 @@ export default {
     }
   },
   components: {
-    Comment
+    Comment,
+    List
   }
 };
 </script>
