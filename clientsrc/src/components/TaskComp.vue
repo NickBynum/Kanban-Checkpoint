@@ -11,7 +11,8 @@
             data-toggle="dropdown"
           >move</button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
-            <list v-for="list in lists" :listData="list" :key="list._id" class="dropdown-item" type="button">{{list.title}}</list>
+            <list v-for="list in lists" :listData="list" :key="list._id" class="dropdown-item" type="submit" @click="moveTaskToDifList(list)">{{list.title}}
+            </list>
           </div>
         </div>
       </div>
@@ -142,6 +143,10 @@ export default {
     editTask() {
       this.$store.dispatch("editTask", this.taskData);
       this.editing = false;
+    },
+    moveTaskToDifList (list) {
+      this.taskData.listId = list.id
+      this.$store.dispatch("moveTaskToDifList", this.taskData)
     }
   },
   components: {

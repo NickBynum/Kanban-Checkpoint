@@ -164,6 +164,16 @@ export default new Vuex.Store({
         console.error(error);
       }
     },
+    async moveTaskToDifList({ commit, dispatch }, taskData) {
+      try {
+        let res = await api.put("task/" + taskData.id, taskData)
+        debugger
+        dispatch("getTaskByListId", taskData.listId)
+      } catch (error) {
+        console.error(error);
+        
+      }
+    },
     //#endregion
 
 
