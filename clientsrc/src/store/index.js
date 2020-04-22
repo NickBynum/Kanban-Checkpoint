@@ -89,30 +89,38 @@ export default new Vuex.Store({
 
     //#region -- LISTS --
     //NOTE if fails try setActiveBoard in commit, if fails again give up
-async getListByBoardId({commit, dispatch}, boardId) {
-  try {
-    let res = await api.get("boards/" + boardId + "/list")
-    commit('setActiveList', res.data)
-  } catch (error) {
-    console.error(error);
-    
-  }
-},
-  async addNewList( {commit, dispatch}, newList){
-    try {
-      let res = await api.post("list", newList)
-      dispatch("getBoard", newList.boardId)
-      dispatch("getListByBoardId", newList.boardId)
-    } catch (error) {
-      console.error(error);
-      
-    }
-  },
-    async editList({ commit, dispatch }, listId) {
+    async getListByBoardId({ commit, dispatch }, boardId) {
       try {
-        let res = await api.put("list/" + listId.id, listId)
-        commit('setBoards', res.data)
-        dispatch('getBoard', listId.boardId)
+        let res = await api.get("boards/" + boardId + "/list")
+        commit('setActiveList', res.data)
+      } catch (error) {
+        console.error(error);
+
+      }
+    },
+    async addNewList({ commit, dispatch }, newList) {
+      try {
+        let res = await api.post("list", newList)
+        dispatch("getBoard", newList.boardId)
+        dispatch("getListByBoardId", newList.boardId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteList({ commit, dispatch }, listData) {
+      try {
+        let res = await api.delete("list/" + listData.id)
+        dispatch("getBoard", listData.boardId)
+        dispatch("getListByBoardId", listData.boardId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editList({ commit, dispatch }, listData) {
+      try {
+        let res = await api.put("list/" + listData.id, listData)
+        dispatch('getBoard', listData.boardId)
+        dispatch("getListByBoardId", listData.boardId)
       } catch (error) {
         console.error(error);
       }
@@ -120,10 +128,37 @@ async getListByBoardId({commit, dispatch}, boardId) {
     //#endregion
 
     //#region --Tasks--
-    async getTaskByListId({commit, dispatch}, listId) {
+    async getTaskByListId({ commit, dispatch }, listId) {
       try {
         let res = await api.get("list/" + listId + "/task")
-        commit('setActiveTask', {listId, tasks: res.data})
+        commit('setActiveTask', { listId, tasks: res.data })
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async addNewTask({ commit, dispatch }, newTask) {
+      try {
+        console.log(newTask);
+        
+        let res = await api.post("task", newTask)
+        dispatch("getBoard", newTask.listId)
+        dispatch("getListByBoardId", newTask.listId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editTask({ commit, dispatch }, taskData) {
+      try {
+        let res = await api.put("task/" + taskData.id, taskData)
+        dispatch("getTaskByListId", taskData.listId)
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async deleteTask({ commit, dispatch }, taskData) {
+      try {
+        let res = await api.delete("task/" + taskData.id)
+        dispatch("getTaskByListId", taskData.listId)
       } catch (error) {
         console.error(error);
       }
@@ -133,7 +168,7 @@ async getListByBoardId({commit, dispatch}, boardId) {
 
 
     //#region --Comments --
-    async getCommentByTaskId({commit, dispatch}, taskId) {
+    async getCommentByTaskId({ commit, dispatch }, taskId) {
       try {
         let res = await api.get("task/" + taskId + "/comment")
         commit('setActiveComment', res.data)
