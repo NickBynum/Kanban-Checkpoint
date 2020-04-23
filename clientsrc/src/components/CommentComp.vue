@@ -44,9 +44,9 @@
       </button>
     </div>
     <div v-else>
-      <form>
+      <form @click="editComment()">
         <input type="text" v-model="commentData.title" />
-        <button class="btn text-warning" @click="editComment()">submit</button>
+        <button type="submit" class="btn text-warning">submit</button>
       </form>
     </div>
   </div>

@@ -57,15 +57,15 @@
       </div>
     </div>
     <div v-else>
-      <form>
+      <form  @click="editList()">
         <input type="text" v-model="listData.title" />
-        <button class="btn text-warning" @click="editList()">submit</button>
+        <button class="btn text-warning" type="submit">Submit</button>
       </form>
     </div>
     <task v-for="task in tasks" :taskData="task" :key="task._id"></task>
-    <form>
+    <form @click="addNewTask()">
        <input type="text" v-model="newTask.title" class="bg-dark text-white m-0 p-0 w-100 border-0" placeholder="Enter New Task">
-       <button class="btn btn-sm btn-light" @click="addNewTask()">Submit Task</button>
+       <button type="submit" class="btn btn-sm btn-light">Submit Task</button>
     </form>
   </div>
 </template>
