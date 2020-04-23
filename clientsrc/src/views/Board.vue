@@ -1,16 +1,35 @@
 <template>
-  <div class="board container-fluid">
-    <div class="row">
-      <p>{{board.title}}</p>
+  <div class="board">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <p>{{board.title}}</p>
+        </div>
+      </div>
     </div>
-    <div class="flex-row card bg-dark text-light">
-      <list v-for="list in lists" :listData="list" :key="list._id"></list>
-       <form>
-       <input type="text" v-model="newList.title" class="bg-dark text-white input-group-sm border-0 ml-5" placeholder="New List" @submit="addNewList()">
-        <button type="submit" @click="addNewList()">submit</button>
-        </form>
+    <div class="container-fluid">
+      <div class="row m-3">
+        <div class="col-12 col-md-2">
+          <div class="row">
+            <div class="row card bg-dark text-light align-content-start">
+              <div class="col-12">
+                <list v-for="list in lists" :listData="list" :key="list._id"></list>
+                <form>
+                  <input
+                    type="text"
+                    v-model="newList.title"
+                    class="bg-dark text-white input-group-sm border-0 ml-5"
+                    placeholder="New List"
+                    @submit="addNewList()"
+                  />
+                  <button type="submit" @click="addNewList()">submit</button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-
     <!--dont touch
     -->
   </div>
@@ -19,17 +38,18 @@
 <script>
 import List from "../components/ListComp";
 export default {
-  data () {
+  data() {
     return {
       newList: {}
-    }
+    };
   },
   name: "board",
   props: ["boardId"],
   async mounted() {
     await this.$store.dispatch("getProfile");
     this.$store.dispatch("getBoard", this.$route.params.boardId);
-    this.$store.dispatch("getListByBoardId", this.$route.params.boardId);  },
+    this.$store.dispatch("getListByBoardId", this.$route.params.boardId);
+  },
   computed: {
     profile() {
       return this.$store.state.user;
@@ -40,15 +60,15 @@ export default {
     },
     lists() {
       return this.$store.state.lists;
-    },
+    }
   },
   methods: {
-    addNewList(){
-      this.newList.boardId = this.$route.params.boardId
-      this.newList.creatorEmail = this.board.creatorEmail
+    addNewList() {
+      this.newList.boardId = this.$route.params.boardId;
+      this.newList.creatorEmail = this.board.creatorEmail;
       console.log("addNewList", this.newList.creatorEmail);
       this.$store.dispatch("addNewList", this.newList);
-      this.newList = {}
+      this.newList = {};
     }
   },
   components: {
@@ -58,5 +78,4 @@ export default {
 </script>
 
 <style>
-
 </style>
