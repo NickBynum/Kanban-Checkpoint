@@ -3,16 +3,12 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-12">
-          <p>{{board.title}}</p>
+          <h2 class="text-light">{{board.title}}</h2>
         </div>
       </div>
-    </div>
-    <div class="container-fluid">
       <div class="row m-3">
-        <div class="col-12 col-md-2">
-          <div class="row">
-            <div class="row card bg-dark text-light align-content-start">
-              <div class="col-12">
+<div class="col-12">
+            <div id="card-display" class="row card bg-dark text-light">
                 <list v-for="list in lists" :listData="list" :key="list._id"></list>
                 <form>
                   <input
@@ -24,9 +20,7 @@
                   />
                   <button type="submit" @click="addNewList()">submit</button>
                 </form>
-              </div>
-            </div>
-          </div>
+        </div>
         </div>
       </div>
     </div>
@@ -78,4 +72,7 @@ export default {
 </script>
 
 <style>
+#card-display {
+  flex-direction: row;
+}
 </style>

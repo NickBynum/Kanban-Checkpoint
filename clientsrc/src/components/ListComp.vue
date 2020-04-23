@@ -1,6 +1,6 @@
 <template>
-  <div class="list row border rounded">
-    <div class="col-12">
+<!-- This is the line that will either make the col full size or 2, but won't wrap -->
+  <div class="list col-12 col-md-2 border rounded"> 
       <div v-if="!editing">
         <div class="row">
           <div class="col-12">
@@ -77,7 +77,6 @@
           </form>
         </div>
       </div>
-    </div>
   </div>
 </template>
 

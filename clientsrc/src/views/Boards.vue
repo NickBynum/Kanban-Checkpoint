@@ -1,6 +1,6 @@
 <template>
   <div class="boards">
-    WELCOME TO THE BOARDS!!!
+    <h2 class="shadow-1">Select your board to work with today</h2>
     <form @submit.prevent="addBoard">
       <input type="text" placeholder="title" v-model="newBoard.title" required />
       <input type="text" placeholder="description" v-model="newBoard.description" />

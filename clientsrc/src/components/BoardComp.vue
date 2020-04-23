@@ -1,35 +1,39 @@
 <template>
-  <div class="board">
-<h1>THIS IS THE BOARD!!!!!!</h1>
-<p>{{boardData.title}}</p>
-<button @click="selectBoard()">Select Board</button>
-
+  <div container-fluid>
+    <div class="row">
+      <div class="col-12">
+        <div class="board">
+          <h4 class="text-light">{{boardData.title}}</h4>
+          <button class="btn btn-light" @click="selectBoard()">Select Board</button>
+          <button class="btn btn-danger" @click="DeleteBoard()">Select Board</button>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
 
 <script>
 export default {
-  name: 'board',
+  name: "board",
   props: ["boardData"],
-  data(){
-    return {}
+  data() {
+    return {};
   },
-  computed:{},
-  methods:{
+  computed: {},
+  methods: {
     selectBoard() {
-      this.$store.commit("setActiveBoard", {})
+      this.$store.commit("setActiveBoard", {});
       this.$router.push({
         name: "board",
-        params: {boardId: this.boardData.id}
-      })
+        params: { boardId: this.boardData.id }
+      });
     }
   },
-  components:{}
-}
+  components: {}
+};
 </script>
 
 
 <style scoped>
-
 </style>

@@ -128,7 +128,7 @@
     <div v-else>
       <form>
         <input type="text" v-model="taskData.title" />
-        <button class="btn btn-sm btn-success" @click="editTask()">OK</button>
+        <button class="btn btn-sm btn-success" @click="editTask()" data-dismiss="false">OK</button>
       </form>
     </div>
   </div>
