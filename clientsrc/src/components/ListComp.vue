@@ -64,8 +64,8 @@
     </div>
     <task v-for="task in tasks" :taskData="task" :key="task._id"></task>
     <form>
-       <input type="text" v-model="newTask.title" class="bg-dark text-white input-group-sm border-0 ml-5" placeholder="New Task">
-       <button @click="addNewTask()">submit</button>
+       <input type="text" v-model="newTask.title" class="bg-dark text-white m-0 p-0 w-100 border-0" placeholder="Enter New Task">
+       <button class="btn btn-sm btn-light" @click="addNewTask()">Submit Task</button>
     </form>
   </div>
 </template>

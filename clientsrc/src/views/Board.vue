@@ -9,16 +9,20 @@
       <div class="col-12">
         <div id="card-display" class="flex-row card bg-dark text-light flex-wrap">
           <list v-for="list in lists" :listData="list" :key="list._id"></list>
-          <form>
-            <input
-              type="text"
-              v-model="newList.title"
-              class="bg-dark text-white input-group-sm border-0 ml-5"
-              placeholder="New List"
-              @submit="addNewList()"
-            />
-            <button type="submit" @click="addNewList()">submit</button>
-          </form>
+          <div class="row ml-3">
+            <div class="col-12 col-md-6">
+              <form>
+                <input
+                  type="text"
+                  v-model="newList.title"
+                  class="bg-dark text-white input-group-sm border-0 w-100"
+                  placeholder="New List"
+                  @submit="addNewList()"
+                />
+                <button class="btn btn-light" type="submit" @click="addNewList()">submit</button>
+              </form>
+            </div>
+          </div>
         </div>
       </div>
     </div>
