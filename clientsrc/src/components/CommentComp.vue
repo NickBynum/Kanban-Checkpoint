@@ -1,7 +1,7 @@
 <template>
-  <div class="comment">
+  <div class="comment mb-1">
     <div v-if="!editing">
-    <p>{{commentData.title}}</p>
+    <p class="m-0">{{commentData.title}}</p>
       <button class="btn btn-sm text-warning" @click="editing = true">
         <svg
           class="bi bi-pencil"

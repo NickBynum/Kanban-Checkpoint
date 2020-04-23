@@ -1,9 +1,10 @@
-<template>
-  <div class="board">
-<h1>THIS IS THE BOARD!!!!!!</h1>
-<p>{{boardData.title}}</p>
-<button @click="selectBoard()">Select Board</button>
 
+<template>
+  <div class="board col-12 col-md-4 card m-1 p-2">
+          <h4 class="text-dark">{{boardData.title}}</h4>
+          <p class="text-dark">Description: {{boardData.description}}</p>
+          <button class="btn btn-secondary m-1" @click="selectBoard()">Select Board</button>
+          <button class="btn btn-danger m-1" @click="DeleteBoard()">Delete Board</button>
   </div>
 </template>
 
