@@ -7,7 +7,7 @@
     </div>
     <div class="row">
       <div class="col-12">
-        <div id="card-display" class="flex-row card bg-dark text-light">
+        <div id="card-display" class="flex-row card bg-dark text-light flex-wrap">
           <list v-for="list in lists" :listData="list" :key="list._id"></list>
           <form>
             <input

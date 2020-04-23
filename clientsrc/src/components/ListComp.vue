@@ -1,5 +1,5 @@
 <template>
-  <div class="list col-12 col-md-2 border rounded">
+  <div class="list col-12 col-md-6 col-lg-2 border rounded">
     <div v-if="!editing">
       <div class="row">
         <div class="col-12">
