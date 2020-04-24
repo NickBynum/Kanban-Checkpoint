@@ -11,7 +11,7 @@
           <list v-for="list in lists" :listData="list" :key="list._id"></list>
           <div class="row ml-3">
             <div class="col-12 col-md-6">
-              <form>
+              <form @submit="addNewList()">
                 <input
                   type="text"
                   v-model="newList.title"
@@ -19,7 +19,7 @@
                   placeholder="New List"
                   @submit="addNewList()"
                 />
-                <button class="btn btn-light" type="submit" @click="addNewList()">submit</button>
+                <button class="btn btn-light" type="submit">Submit</button>
               </form>
             </div>
           </div>

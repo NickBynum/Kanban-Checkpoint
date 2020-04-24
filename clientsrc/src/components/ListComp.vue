@@ -57,13 +57,13 @@
       </div>
     </div>
     <div v-else>
-      <form  @click="editList()">
+      <form  @submit="editList()">
         <input type="text" v-model="listData.title" />
         <button class="btn text-warning" type="submit">Submit</button>
       </form>
     </div>
     <task v-for="task in tasks" :taskData="task" :key="task._id"></task>
-    <form @click="addNewTask()">
+    <form @submit="addNewTask()">
        <input type="text" v-model="newTask.title" class="bg-dark text-white m-0 p-0 w-100 border-0" placeholder="Enter New Task">
        <button type="submit" class="btn btn-sm btn-light">Submit Task</button>
     </form>
