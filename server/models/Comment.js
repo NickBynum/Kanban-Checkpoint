@@ -19,24 +19,24 @@ Comment.virtual("creator",
   })
 
 //CASCADE ON DELETE
-Comment.pre('deleteMany', function (next) {
+// Comment.pre('deleteMany', function (next) {
   //lets find all the lists and remove them
-  Promise.all([
+  // Promise.all([
     //something like...
-    dbContext.Comment.deleteMany({ listId: this._conditions._id }),
-  ])
-    .then(() => next())
-    .catch(err => next(err))
-})
+//     dbContext.Comment.deleteMany({ listId: this._conditions._id }),
+//   ])
+//     .then(() => next())
+//     .catch(err => next(err))
+// })
 
 //CASCADE ON DELETE
-Comment.pre('findOneAndRemove', function (next) {
+// Comment.pre('findOneAndRemove', function (next) {
   //lets find all the lists and remove them
-  Promise.all([
-    dbContext.Comment.deleteMany({ boardId: this._conditions_id })
-  ])
-    .then(() => next())
-    .catch(err => next(err))
-})
+//   Promise.all([
+//     dbContext.Comment.deleteMany({ boardId: this._conditions_id })
+//   ])
+//     .then(() => next())
+//     .catch(err => next(err))
+// })
 
 export default Comment

@@ -126,7 +126,7 @@
       <!--  -->
     </div>
     <div v-else>
-      <form @click="editTask()">
+      <form @submit="editTask()">
         <input type="text" v-model="taskData.title" />
         <button class="btn btn-sm btn-success" type="submit">OK</button>
       </form>

@@ -19,24 +19,24 @@ List.virtual("creator",
   })
 
 //CASCADE ON DELETE
-List.pre('deleteMany', function (next) {
+// List.pre('deleteMany', function (next) {
   //lets find all the lists and remove them
-  Promise.all([
+  // Promise.all([
     //something like...
-    dbContext.Task.deleteMany({ listId: this._conditions._id }),
-  ])
-    .then(() => next())
-    .catch(err => next(err))
-})
+//     dbContext.Task.deleteMany({ listId: this._conditions._id }),
+//   ])
+//     .then(() => next())
+//     .catch(err => next(err))
+// })
 
 //CASCADE ON DELETE
-List.pre('findOneAndRemove', function (next) {
+// List.pre('findOneAndRemove', function (next) {
   //lets find all the lists and remove them
-  Promise.all([
-    dbContext.Task.deleteMany({ boardId: this._conditions_id })
-  ])
-    .then(() => next())
-    .catch(err => next(err))
-})
+//   Promise.all([
+//     dbContext.Task.deleteMany({ boardId: this._conditions_id })
+//   ])
+//     .then(() => next())
+//     .catch(err => next(err))
+// })
 
 export default List
